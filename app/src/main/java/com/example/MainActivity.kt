@@ -1825,7 +1825,7 @@ object AppVersionInfo {
             releaseDate = "August 2026",
             summary = "Internal testing build with AdMob Application ID setup, Google Account licensing state controls, and modular code architecture.",
             changes = listOf(
-                "Updated build configuration to version 1.1.3 (versionCode 3) for internal testing readiness.",
+                "Updated build configuration to version 1.1.3 (versionCode 4) for internal testing readiness.",
                 "Configured Google Advertising AD_ID permission and standard AdMob sample Application ID in AndroidManifest.xml.",
                 "Implemented Link/Unlink Google Account licensing controls with ad-free status toggling and purchase revocation simulation.",
                 "Added active linked device status display (1 / 5 Devices) backed by Google Play Store verification.",
