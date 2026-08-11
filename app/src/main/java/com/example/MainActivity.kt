@@ -734,6 +734,9 @@ class MainViewModel : ViewModel() {
     }
 
     fun startExtraction(context: Context, settings: ExtractionSettings) {
+        if (!SettingsPersistence.isAdFree(context)) {
+            AdManager.loadInterstitialAd(context.applicationContext)
+        }
         if (selectedVideos.isEmpty()) {
             _logs.add("❌ FATAL ERROR: No videos selected to process.")
             return
@@ -1996,11 +1999,17 @@ fun V2pAppScreen(
     val context = LocalContext.current
     val mainListState = rememberLazyListState()
     
+    var showFallbackAdDialog by remember { mutableStateOf(false) }
+
     LaunchedEffect(viewModel.extractionStatus) {
         if (viewModel.extractionStatus is ExtractionStatus.Success) {
             val isPremium = SettingsPersistence.isAdFree(context)
             if (!isPremium) {
-                AdManager.showInterstitialAd(context)
+                AdManager.showInterstitialAd(context) { wasAdShown ->
+                    if (!wasAdShown) {
+                        showFallbackAdDialog = true
+                    }
+                }
             }
         }
     }
@@ -3332,6 +3341,14 @@ fun V2pAppScreen(
                 val action = pendingExtractionAction
                 pendingExtractionAction = null
                 action?.invoke()
+            }
+        )
+    }
+
+    if (showFallbackAdDialog) {
+        InterstitialAdDialog(
+            onAdClosed = {
+                showFallbackAdDialog = false
             }
         )
     }

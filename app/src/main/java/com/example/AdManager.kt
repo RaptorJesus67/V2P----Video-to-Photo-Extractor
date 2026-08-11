@@ -74,11 +74,11 @@ object AdManager {
         return null
     }
 
-    fun showInterstitialAd(context: Context, onAdClosed: () -> Unit = {}) {
+    fun showInterstitialAd(context: Context, onAdClosed: (wasAdShown: Boolean) -> Unit = {}) {
         val activity = findActivity(context)
         if (activity == null) {
             Log.e(TAG, "Cannot show Interstitial ad: context is not or does not wrap an Activity.")
-            onAdClosed()
+            onAdClosed(false)
             return
         }
         val ad = interstitialAd
@@ -87,7 +87,7 @@ object AdManager {
                 override fun onAdDismissedFullScreenContent() {
                     Log.d(TAG, "Interstitial ad was dismissed.")
                     interstitialAd = null
-                    onAdClosed()
+                    onAdClosed(true)
                     // Preload the next ad
                     loadInterstitialAd(activity.applicationContext)
                 }
@@ -95,7 +95,7 @@ object AdManager {
                 override fun onAdFailedToShowFullScreenContent(error: com.google.android.gms.ads.AdError) {
                     Log.e(TAG, "Failed to show Interstitial ad: ${error.message}")
                     interstitialAd = null
-                    onAdClosed()
+                    onAdClosed(false)
                     // Preload the next ad
                     loadInterstitialAd(activity.applicationContext)
                 }
@@ -103,7 +103,7 @@ object AdManager {
             ad.show(activity)
         } else {
             Log.d(TAG, "Interstitial ad not loaded yet, trying to load it.")
-            onAdClosed()
+            onAdClosed(false)
             loadInterstitialAd(activity.applicationContext)
         }
     }
