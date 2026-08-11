@@ -1,6 +1,6 @@
-package com.example
+package com.kcmitch.v2p
 
-import com.example.ui.theme.*
+import com.kcmitch.v2p.ui.theme.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap

@@ -17,4 +17,4 @@ local.properties
 .env
 debug.keystore
 .build-outputs/
-app/src/main/java/com/example/AppConfig.kt
+app/src/main/java/com/kcmitch/v2p/AppConfig.kt

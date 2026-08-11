@@ -1,4 +1,4 @@
-package com.example
+package com.kcmitch.v2p
 
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener

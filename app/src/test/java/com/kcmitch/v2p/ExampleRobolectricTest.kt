@@ -1,4 +1,4 @@
-package com.example
+package com.kcmitch.v2p
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider

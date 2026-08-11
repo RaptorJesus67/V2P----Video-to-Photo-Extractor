@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-  namespace = "com.example"
+  namespace = "com.kcmitch.v2p"
   compileSdk { version = release(36) { minorApiLevel = 1 } }
 
   defaultConfig {

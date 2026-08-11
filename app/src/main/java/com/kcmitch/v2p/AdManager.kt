@@ -1,4 +1,4 @@
-package com.example
+package com.kcmitch.v2p
 
 import android.app.Activity
 import android.content.Context

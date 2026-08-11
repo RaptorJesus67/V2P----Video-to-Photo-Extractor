@@ -1,4 +1,4 @@
-package com.example
+package com.kcmitch.v2p
 
 import org.junit.Assert.*
 import org.junit.Test
