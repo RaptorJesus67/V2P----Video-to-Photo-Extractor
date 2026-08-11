@@ -134,6 +134,8 @@ If you have any questions or suggestions about the Terms and Conditions, please 
 ### Version 1.1.3 (Build 4) - August 2026
 * **Play Store Release Alignment:** Updated build configuration (`applicationId = "com.aistudio.videotophoto.vptxfr"`) and incremented `versionCode` to `4` for full Google Play Store production and internal testing alignment.
 * **Policy Integration:** Added HTML and Markdown formatted Terms & Conditions / Privacy Policy pages for Developer Console compliance.
-* **AdMob Readiness:** Implemented standard AdMob publisher ID setup and generated `app-ads.txt` at both app module assets and repository root for AdMob spider verification.
+* **AdMob SDK Integration:** Integrated Google Mobile Ads SDK (`com.google.android.gms:play-services-ads:23.6.0`), and added the `AdManager` class for managing the lifecycle, preloading, and showing of AdMob ads.
+* **On-Device Real Banner Ads:** Replaced the mock banner ad logic inside the main screen with `RealAdBanner` which displays actual AdMob banners dynamically based on user purchase status (Premium ad-free vs Free version).
+* **Frame Extraction Interstitial Ads:** Integrated automated interstitial ad presentation triggered immediately when a video frame extraction process finishes successfully, ensuring non-disruptive but supportive revenue flow.
 * **Key Cryptography Display:** Embedded on-device view of Google Play Licensing RSA keys directly within UI menus for simplified verification.
 * **Modular Code Refactoring:** Streamlined codebase layout with cleaner component architecture to support robust state preservation and local pipeline processing.

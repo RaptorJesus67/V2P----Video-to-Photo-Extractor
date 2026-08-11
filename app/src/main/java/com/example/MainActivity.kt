@@ -153,6 +153,7 @@ class MainActivity : ComponentActivity() {
         ThemeConfig.initialize(this)
         enableEdgeToEdge()
         V2pBillingManager.queryPurchasesAsync(this)
+        AdManager.initialize(this)
         setContent {
             MyApplicationTheme {
                 Scaffold(
@@ -1994,6 +1995,15 @@ fun V2pAppScreen(
 ) {
     val context = LocalContext.current
     val mainListState = rememberLazyListState()
+    
+    LaunchedEffect(viewModel.extractionStatus) {
+        if (viewModel.extractionStatus is ExtractionStatus.Success) {
+            val isPremium = SettingsPersistence.isAdFree(context)
+            if (!isPremium) {
+                AdManager.showInterstitialAd(context)
+            }
+        }
+    }
     var currentScreen by remember { mutableStateOf(AppScreen.Main) }
     
     var hasPhotosVideosPermission by remember { mutableStateOf(false) }
@@ -4821,58 +4831,68 @@ fun FixedAdFreeUpgradeCard(
 @Composable
 fun MockAdBanner(isLarge: Boolean, modifier: Modifier = Modifier) {
     val context = LocalContext.current
+    val isAdFree = remember { SettingsPersistence.isAdFree(context) }
+    
+    if (isAdFree) {
+        return
+    }
+
     val isOnline = remember { OfflineAdCache.isNetworkAvailable(context) }
-    val (cachedTitle, cachedSubtitle) = remember(isLarge) { OfflineAdCache.getCachedBanner(isLarge) }
     
-    val height = if (isLarge) 100.dp else 50.dp
-    val width = 320.dp
-    
-    Box(
-        modifier = modifier
-            .width(width)
-            .height(height)
-            .background(Color(0xFF1E2528), RoundedCornerShape(8.dp))
-            .border(1.dp, TechCyan.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
-            .padding(8.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+    if (isOnline) {
+        RealAdBanner(modifier = modifier, isLarge = isLarge)
+    } else {
+        val (cachedTitle, cachedSubtitle) = remember(isLarge) { OfflineAdCache.getCachedBanner(isLarge) }
+        val height = if (isLarge) 100.dp else 50.dp
+        val width = 320.dp
+        
+        Box(
+            modifier = modifier
+                .width(width)
+                .height(height)
+                .background(Color(0xFF1E2528), RoundedCornerShape(8.dp))
+                .border(1.dp, TechCyan.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
+                .padding(8.dp),
+            contentAlignment = Alignment.Center
         ) {
-            Box(
-                modifier = Modifier
-                    .background(if (isOnline) TechCyan.copy(alpha = 0.2f) else WarningAmber.copy(alpha = 0.2f), RoundedCornerShape(4.dp))
-                    .padding(horizontal = 6.dp, vertical = 2.dp)
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = if (isOnline) "AD" else "OFFLINE CACHED AD",
-                    style = TextStyle(
-                        color = if (isOnline) TechCyan else WarningAmber,
-                        fontSize = 9.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.Monospace
-                    )
-                )
-            }
-            Spacer(modifier = Modifier.width(8.dp))
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = if (isOnline) (if (isLarge) "Unlock Premium Video AI Extraction" else "Video To Pics Pro") else cachedTitle,
-                    style = TextStyle(
-                        color = TextLight,
-                        fontSize = 11.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                )
-                if (isLarge) {
+                Box(
+                    modifier = Modifier
+                        .background(WarningAmber.copy(alpha = 0.2f), RoundedCornerShape(4.dp))
+                        .padding(horizontal = 6.dp, vertical = 2.dp)
+                ) {
                     Text(
-                        text = if (isOnline) "10x faster local GPU processing. Ad-free." else cachedSubtitle,
+                        text = "OFFLINE CACHED AD",
                         style = TextStyle(
-                            color = CoolGrey,
-                            fontSize = 10.sp
+                            color = WarningAmber,
+                            fontSize = 9.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Monospace
                         )
                     )
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = cachedTitle,
+                        style = TextStyle(
+                            color = TextLight,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                    if (isLarge) {
+                        Text(
+                            text = cachedSubtitle,
+                            style = TextStyle(
+                                color = CoolGrey,
+                                fontSize = 10.sp
+                            )
+                        )
+                    }
                 }
             }
         }
