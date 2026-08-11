@@ -20,20 +20,19 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 object AdManager {
     private const val TAG = "AdManager"
 
-    // Production Publisher Details
-    const val PROD_APP_ID = "ca-app-pub-8741391110749449~3347511713"
-    const val PROD_PUBLISHER_ID = "pub-8741391110749449"
+    // Dynamically resolved via master AppConfig
+    val bannerAdUnitId: String
+        get() = AppConfig.activeBannerAdUnitId
 
-    // Standard AdMob test unit IDs for development / compliance testing
-    private const val TEST_BANNER_ID = "ca-app-pub-3940256099942544/6300978111"
-    private const val TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712"
+    val interstitialAdUnitId: String
+        get() = AppConfig.activeInterstitialAdUnitId
 
-    var bannerAdUnitId: String = TEST_BANNER_ID
-    var interstitialAdUnitId: String = TEST_INTERSTITIAL_ID
+    private var customBannerAdUnitId: String? = null
+    private var customInterstitialAdUnitId: String? = null
 
     fun setAdUnitIds(bannerId: String, interstitialId: String) {
-        if (bannerId.isNotBlank()) bannerAdUnitId = bannerId
-        if (interstitialId.isNotBlank()) interstitialAdUnitId = interstitialId
+        if (bannerId.isNotBlank()) customBannerAdUnitId = bannerId
+        if (interstitialId.isNotBlank()) customInterstitialAdUnitId = interstitialId
     }
 
     private var interstitialAd: InterstitialAd? = null

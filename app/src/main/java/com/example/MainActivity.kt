@@ -1809,12 +1809,8 @@ object SettingsPersistence {
 }
 
 object AppVersionInfo {
-    const val MAJOR = 1
-    const val MINOR = 1
-    const val PATCH = 3
-
     val versionDisplayString: String
-        get() = if (PATCH == 0) "ver $MAJOR.$MINOR" else "ver $MAJOR.$MINOR.$PATCH"
+        get() = "ver ${AppConfig.versionNumber}"
 
     data class VersionLog(
         val version: String,

@@ -103,8 +103,9 @@ data class SavedPhotoEntry(
 )
 
 object V2pBillingManager {
-    // Base64-encoded RSA public key from Google Play Console used for purchase validation
-    const val GOOGLE_PLAY_LICENSING_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxboh0WKHc9nnrksVb6CMup5VVzJnuEB0WNNywEmotjLHp62SHjPJK8ONgO55dkTmX30J72APsYRrBzrkZuFY0KpIsbWPEyoQS4yKMpjRtmr3vcD/Ne9RwI7SV3RJd/mZScgzFYFXMpoPi/Do64QpcUq222JW5b3qR5vCN43WhiRdXnM6zFZMgPZ02K8aoe5awO6yIMyHSRjio4FQXKIiWMuhqkqXszFxbu3IPxvsy38jLWemA1X43t50+8aY/QfVbb0lkfSNK9R/ZkRb1EtgB+t7U+1tY90uU1vZyVKQtCFqOklU14SBbn0KnpHvae3jGlwKQdnFzkBg0S/QR87HjQIDAQAB"
+    // Base64-encoded RSA public key from Google Play Console sourced from AppConfig
+    val GOOGLE_PLAY_LICENSING_KEY: String
+        get() = AppConfig.GOOGLE_PLAY_LICENSING_KEY
 
     private const val SKU_AD_FREE = "ad_free_lifetime"
     private var billingClient: BillingClient? = null
