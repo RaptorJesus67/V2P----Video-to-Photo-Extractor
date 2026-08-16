@@ -2060,6 +2060,18 @@ object AppVersionInfo {
 
     val changelog: List<VersionLog> = listOf(
         VersionLog(
+            version = "ver 1.1.4 (Build 7)",
+            releaseDate = "August 2026",
+            summary = "Google Play Console release build with Native Debug Symbols, embedded RSA Licensing public key, and Gradle 9.3.1 toolchain upgrade.",
+            changes = listOf(
+                "Updated build configuration to Version 1.1.4 (versionCode 7).",
+                "Enabled full native debug symbol generation (ndk.debugSymbolLevel = FULL) for enhanced Play Console crash and ANR analytics.",
+                "Embedded Google Play Licensing RSA Public Key in AppConfig for purchase and license verification.",
+                "Upgraded Gradle wrapper and build configuration to Gradle 9.3.1.",
+                "Resolved Play Billing KTX dependency references and optimized release signing fallback."
+            )
+        ),
+        VersionLog(
             version = "ver 1.1.3",
             releaseDate = "August 2026",
             summary = "Internal testing build with AdMob Application ID setup, Google Account licensing state controls, and modular code architecture.",
