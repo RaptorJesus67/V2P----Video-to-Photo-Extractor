@@ -17,7 +17,7 @@ android {
     applicationId = "com.aistudio.videotophoto.vptxfr"
     minSdk = 24
     targetSdk = 36
-    versionCode = 6
+    versionCode = 7
     versionName = "1.1.4"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
