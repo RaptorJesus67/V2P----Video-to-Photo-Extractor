@@ -22,6 +22,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "V2P Frame Grabber"
+rootProject.name = "v2p"
 
 include(":app")

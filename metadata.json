@@ -1,6 +1,8 @@
 {
-  "name": "V2P Frame Grabber",
-  "description": "V2P is the only reliable, <i>Subscription-free</i> Video to Photo Frame Extractor that runs entirely locally on your device. No subscriptions. No daily limit. No AI tokens needed. More freedom to choose FPS, exact frame, frame synchronization, than any other Play Store App.\n\nContains ads and an option to purchase ad-free (for life) for $2.99. If ad-free were ever needed to be converted to subscription model, your purchase is locked-in and honored for life!",
+  "name": "v2p",
+  "description": "Video to Photo frame extraction app with persistent pipeline queue and customizable settings.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
