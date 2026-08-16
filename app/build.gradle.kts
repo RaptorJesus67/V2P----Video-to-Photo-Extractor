@@ -117,7 +117,7 @@ dependencies {
   implementation(libs.logging.interceptor)
   implementation(libs.moshi.kotlin)
   implementation(libs.okhttp)
-  implementation(libs.billing.ktx)
+  implementation(libs.play.billing.ktx)
   implementation(libs.play.services.ads)
   // implementation(libs.play.services.location)
   implementation(libs.retrofit)
