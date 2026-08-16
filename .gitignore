@@ -13,6 +13,8 @@
 /captures
 /gradle
 /assets
+build/
+app/build/
 .env.example
 app-ads.txt
 settings.gradle.kts
