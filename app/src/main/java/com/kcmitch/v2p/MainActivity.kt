@@ -2060,6 +2060,18 @@ object AppVersionInfo {
 
     val changelog: List<VersionLog> = listOf(
         VersionLog(
+            version = "ver 1.1.6 (Build 9)",
+            releaseDate = "August 2026",
+            summary = "Brand new metallic hummingbird and shutter aperture app icon, WebP image asset conversion for optimal package size, and matching luxury navy launch screen theme.",
+            changes = listOf(
+                "Updated build configuration to Version 1.1.6 (versionCode 9).",
+                "Integrated new high-definition brand icon with metallic silver hummingbird, interlocking brushed shutter blades, golden center swirl, and neon glow rings.",
+                "Converted all launcher and in-app icon assets to highly optimized WebP format across all screen densities (mdpi, hdpi, xhdpi, xxhdpi, xxxhdpi).",
+                "Updated launch screen and system bar palette to luxury midnight navy (#0A192F) with warm gold (#E5B869) and cyan accents.",
+                "Updated in-app header branding and adaptive vector launcher layers."
+            )
+        ),
+        VersionLog(
             version = "ver 1.1.5 (Build 8)",
             releaseDate = "August 2026",
             summary = "Upgraded to Google Play Billing Library version 9.0.0, updated versionCode to 8 (versionName 1.1.5), and ensured compliance with Google Play requirements.",
@@ -3039,12 +3051,12 @@ fun V2pAppScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.img_app_icon_yellow_1783684646197),
+                    painter = painterResource(id = R.drawable.v2p_app_icon),
                     contentDescription = "V2P Logo",
                     modifier = Modifier
                         .size(40.dp)
                         .clip(RoundedCornerShape(8.dp))
-                        .border(1.dp, BorderSlate, RoundedCornerShape(8.dp)),
+                        .border(1.dp, TechCyan.copy(alpha = 0.4f), RoundedCornerShape(8.dp)),
                     contentScale = ContentScale.Crop
                 )
 

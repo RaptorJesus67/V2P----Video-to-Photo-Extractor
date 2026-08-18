@@ -4,7 +4,7 @@ package com.kcmitch.v2p.config
  * Master Application Configuration for v2p (Video to Photos).
  */
 object AppConfig {
-    const val versionNumber: String = "1.1.5"
+    const val versionNumber: String = "1.1.6"
 
     /**
      * Master test mode toggle.
