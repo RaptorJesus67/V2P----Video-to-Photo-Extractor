@@ -2060,6 +2060,17 @@ object AppVersionInfo {
 
     val changelog: List<VersionLog> = listOf(
         VersionLog(
+            version = "ver 1.1.5 (Build 8)",
+            releaseDate = "August 2026",
+            summary = "Upgraded to Google Play Billing Library version 9.0.0, updated versionCode to 8 (versionName 1.1.5), and ensured compliance with Google Play requirements.",
+            changes = listOf(
+                "Upgraded Google Play Billing Library to version 9.0.0 (meets the August 2026 requirement for Play Billing 8.0.0+).",
+                "Updated build configuration to Version 1.1.5 (versionCode 8).",
+                "Verified asynchronous in-app purchase verification and license query pipeline compatibility.",
+                "Maintained full native debug symbol generation and Gradle 9.3.1 toolchain build optimization."
+            )
+        ),
+        VersionLog(
             version = "ver 1.1.4 (Build 7)",
             releaseDate = "August 2026",
             summary = "Google Play Console release build with Native Debug Symbols, embedded RSA Licensing public key, and Gradle 9.3.1 toolchain upgrade.",
